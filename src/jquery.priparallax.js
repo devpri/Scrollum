@@ -1,6 +1,6 @@
 /*
  * PRI Parallax - jQuery parallax plugin
- * Version 1.0.0 Beta 1
+ * Version 1.0.0 Beta 2
  * Copyright 2015 Devpri
  * License     GNU General Public License version 2 or later.
  */
@@ -18,7 +18,7 @@
         base.$e = $(el);
         
         // Add a reverse reference to the DOM object
-        base.$e.data('priparallax', base);
+        base.$e.data("priparallax", base);
         
         var area, offset;
         
@@ -28,7 +28,7 @@
             offset = base.offset();
             if ((base.mobileDetect() === false) || (options.mobile === true && base.mobileDetect() === "mobile-native-scroll")){ 
                 window.requestAnimationFrame(function() {
-                    $(base).css('transition',  options.duration +'ms');
+                    $(base).css("transition",  options.duration +"ms");
                     base.animation(base.position(), options.animation);
                 });
                 
@@ -46,8 +46,8 @@
                     });
                 }));
             }  else if (base.mobileDetect() === "mobile-no-native-scroll" &&
-                // Mobile don't support native scroll -> iScroll is loaded
-                typeof IScroll == 'function' && $("#pri-parallax-inner").length) {
+                // Mobile don"t support native scroll -> iScroll is loaded
+                typeof IScroll == "function" && $("#pri-parallax-inner").length) {
                 if (!$("#pri-parallax-wrapper").length ) {
                     $("#pri-parallax-inner").wrap("<div id='pri-parallax-wrapper'/>");
                     $("#pri-parallax-wrapper")
@@ -56,7 +56,7 @@
                 }
                
                 var iScroll;
-                iScroll =  new IScroll('#pri-parallax-wrapper',
+                iScroll =  new IScroll("#pri-parallax-wrapper",
                     {
                         scrollX: false, 
                         scrollY: true,
@@ -72,10 +72,10 @@
                     });
                 };
 
-                iScroll.on('scroll', base.updateMobilePosition);
-                iScroll.on('scrolltop', base.updateMobilePosition);
+                iScroll.on("scroll", base.updateMobilePosition);
+                iScroll.on("scrolltop", base.updateMobilePosition);
 
-                document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+                document.addEventListener("touchmove", function (e) { e.preventDefault(); }, false);
             }
         };
 
@@ -83,12 +83,12 @@
         if (!Date.now)
             Date.now = function() { return new Date().getTime(); };
         (function() {
-            var vtopors = ['webkit', 'moz'];
+            var vtopors = ["webkit", "moz"];
             for (var i = 0; i < vtopors.length && !window.requestAnimationFrame; ++i) {
                 var vp = vtopors[i];
-                window.requestAnimationFrame = window[vp+'RequestAnimationFrame'];
-                window.cancelAnimationFrame = (window[vp+'CancelAnimationFrame'] ||
-                                           window[vp+'CancelRequestAnimationFrame']);
+                window.requestAnimationFrame = window[vp+"RequestAnimationFrame"];
+                window.cancelAnimationFrame = (window[vp+"CancelAnimationFrame"] ||
+                                           window[vp+"CancelRequestAnimationFrame"]);
             }
             if (/iP(ad|hone|od).*OS 6/.test(window.navigator.userAgent) || // iOS6 is buggy
                 !window.requestAnimationFrame || !window.cancelAnimationFrame) {
@@ -123,9 +123,9 @@
         // percent to pixels
         base.valuePixels = function(value, total){
             var valuePixels;
-            if (value.indexOf('%') >= 0) {
+            if (value.indexOf("%") >= 0) {
                 valuePixels = parseInt(value) / 100 * parseInt(total);
-            } else if ((value.indexOf('px') >= 0) || (!isNaN(parseFloat(value)))) {
+            } else if ((value.indexOf("px") >= 0) || (!isNaN(parseFloat(value)))) {
                 valuePixels = parseInt(value);
             }
             return valuePixels;
@@ -178,33 +178,33 @@
                                     unit = animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m].match(/px|em|%/);
                                     multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                                     css = currentValue + ((percent - currentBreakpoint ) * multiplicator);
-                                    css = css.toFixed(options.precision) + ((unit === null) ? '' : unit);
+                                    css = css.toFixed(options.precision) + ((unit === null) ? "" : unit);
                                     cssPropertyValue.push(css);
                                 }
-                                cssValue.push(propertyKeys[l] + '(' + cssPropertyValue  + ')');
+                                cssValue.push(propertyKeys[l] + "(" + cssPropertyValue  + ")");
                             }
-                            cssValue = cssValue.join(' ');
+                            cssValue = cssValue.join(" ");
                             //console.log(cssValue);
                         // Check if value is an array
                         } else if ($.isArray(propertyVal)){
                             cssValue = [];
                             for (l = 0; l < propertyVal.length; l++) {
                                 nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseInt(animation[animationKeys[i+1]][cssAnimationKeys[j]][l]);
-                                currentValue =  parseInt(animation[animationKeys[i]][cssAnimationKeys[j]][l].replace( /^\D+/g, ''));
+                                currentValue =  parseInt(animation[animationKeys[i]][cssAnimationKeys[j]][l].replace( /^\D+/g, ""));
                                 unit = animation[animationKeys[i]][cssAnimationKeys[j]][l].match(/px|em|%/);
                                 multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                                 css = currentValue + ((percent - currentBreakpoint ) * multiplicator);
-                                css = css.toFixed(options.precision) + ((unit === null) ? '' : unit);
+                                css = css.toFixed(options.precision) + ((unit === null) ? "" : unit);
                                 cssValue.push(css);
                             }
-                            cssValue = cssValue.join(' ');
+                            cssValue = cssValue.join(" ");
                         } else if (base.isNumeric(parseInt(animation[animationKeys[0]][cssAnimationKeys[j]]))) {
                             currentValue =  parseInt(animation[animationKeys[i]][cssAnimationKeys[j]]);
                             nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseInt(animation[animationKeys[i+1]][cssAnimationKeys[j]]);
                             unit = animation[animationKeys[i]][cssAnimationKeys[j]].match(/px|em|%/);
                             multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                             cssValue = currentValue + ((percent - currentBreakpoint ) * multiplicator);
-                            cssValue = cssValue.toFixed(options.precision) + ((unit === null) ? '' : unit);
+                            cssValue = cssValue.toFixed(options.precision) + ((unit === null) ? "" : unit);
                         } else {
                             cssValue = animation[animationKeys[i]][cssAnimationKeys[j]];
                         }
@@ -220,7 +220,7 @@
         // Element Position
         base.position = function(scrolled) {
             if (scrolled === undefined) {scrolled = $(window).scrollTop();}
-            var percent = 100 / (area / (offset + area + scrolled));
+            var percent = 100 / (area / (scrolled + area - offset ));
             if (percent > 100) percent = 100;
             if (percent < 0) percent = 0;
             percent = percent.toFixed(options.precision);
@@ -245,7 +245,7 @@
         base.trigger = function (){
             // trigger Parallax
             var trigger;
-            if (options.trigger === ''){
+            if (options.trigger === ""){
                trigger = base;
             } else {
                trigger = options.trigger;
@@ -271,25 +271,24 @@
             var elementOffset = $(trigger).offset().top;
             var top = base.valuePixels(options.top , windowHeight);
             var elementTop = base.valuePixels(options.elementTop , elementHeight);
-            var offset = elementOffset - elementHeight + top + elementTop;
+            var offset = elementOffset + elementHeight - top - elementTop;
             return offset;
         };
-        
         // Init
         base.init();
     };
 
     // Plugin defaults – added as a property on our plugin function.
     $.pri.parallax.defaults = {
-        trigger         : '',
-        top            : '0',
-        bottom         : '0',
-        elementTop     : '100%',
-        elementBottom  : '0',
-        precision      : '0',
+        trigger         : "",
+        top            : "0",
+        bottom         : "0",
+        elementTop     : "100%",
+        elementBottom  : "0",
+        precision      : "0",
         mobile         : false,
-        wait           : '100',
-        duration       : '300',
+        wait           : "100",
+        duration       : "300",
         animation      : {}
     };
     
