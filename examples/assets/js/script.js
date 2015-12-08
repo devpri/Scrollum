@@ -11,6 +11,7 @@ $(function() {
    center("#sub-section-1", "#section-1");
    center("#sub-section-2", "#section-2");
    center("#sub-section-3", "#section-3");
+   center("#github", "#section-4");
 
    var resizeTimer;
    $(window).resize(function(){
@@ -20,6 +21,7 @@ $(function() {
             center("#sub-section-1", "#section-1");
             center("#sub-section-2", "#section-2");
             center("#sub-section-3", "#section-3");
+            center("#github", "#section-4");
         }, 300);   		
     });
 
@@ -30,8 +32,8 @@ $(function() {
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait      : "100",
-        duration : "300",
+        wait          : "100",
+        duration      : "300",
         animation     : {
             0 : {
                 "backgroundPosition": ["0%", "0%"],
@@ -111,24 +113,7 @@ $(function() {
             }
         }
 	});
-   $("#sub-section-3-content").priparallax({
-        trigger        : "#section-3",
-        bottom         : "0",
-        top            : "0",
-        elementBottom  : "50%",
-        elementTop    : "50%",
-        precision     : "4",
-        mobile        : false,
-        wait      : "50",
-        animation     : {
-            0 : {
-                "transform" : {"rotateY" : ["0deg"]},
-            },
-            100 : {
-                "transform" : {"rotateY" : ["180deg"]},
-            },
-        }
-    });
+  
 
     $("#section-3").priparallax({
         bottom          : "0",
@@ -149,7 +134,26 @@ $(function() {
         }
     });
 
-     $("#section-4-overlay").priparallax({
+    $("#sub-section-3-content").priparallax({
+        trigger        : "#section-3",
+        bottom         : "0",
+        top            : "0",
+        elementBottom  : "60%",
+        elementTop    : "60%",
+        precision     : "4",
+        mobile        : true,
+        wait          : "50",
+        animation     : {
+            0 : {
+                "transform" : {"rotateY" : ["0deg"]},
+            },
+            100 : {
+                "transform" : {"rotateY" : ["180deg"]},
+            },
+        }
+    });
+
+    $("#section-4-overlay").priparallax({
         trigger        :"#section-4",
         bottom          : "0",
         top            : "0",
@@ -165,6 +169,26 @@ $(function() {
             },
             100 : {
                 "backgroundColor": { rgba : ["30", "30","30","0.8"]}
+            }
+        }
+    });
+
+    $("#github").priparallax({
+        trigger        :"#section-4",
+        bottom          : "0",
+        top            : "0",
+        elementBottom  : "0",
+        elementTop    : "100%",
+        precision     : "4",
+        mobile        : true,
+        wait          : "50",
+        duration      : "400",
+        animation     : {
+            0 : {
+                "transform" : {"translateY" : ["400px"]},
+            },
+            100 : {
+                "transform" : {"translateY" : ["0px"]},
             }
         }
     });

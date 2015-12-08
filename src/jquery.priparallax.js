@@ -184,7 +184,7 @@
                                         precision = options.precision;
                                     };
                                     currentValue =  parseFloat(currentValue);
-                                    unit = animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m].match(/px|em|%/);
+                                    unit = animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m].match(/px|em|%|deg/);
                                     multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                                     css = currentValue + ((percent - currentBreakpoint ) * multiplicator);
                                     css = css.toFixed(precision) + ((unit === null) ? "" : unit);

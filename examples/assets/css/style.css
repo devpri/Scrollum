@@ -144,3 +144,7 @@ body{
 	display: inline-block;
 	width: auto;
 }
+#github {
+    text-align: center;
+    padding: 20px;
+}
