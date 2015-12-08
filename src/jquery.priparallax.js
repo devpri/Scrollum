@@ -26,18 +26,23 @@
         base.init = function(){
             area = base.area();
             offset = base.offset();
+            
             if ((base.mobileDetect() === false) || (options.mobile === true && base.mobileDetect() === "mobile-native-scroll")){ 
                 window.requestAnimationFrame(function() {
-                    $(base).css("transition",  options.duration +"ms");
+                    $(base).css("transition",  options.duration +"ms"); 
                     base.animation(base.position(), options.animation);
                 });
-                
+
+                var resizeTimer;
                 $(window).resize(function(){
-                    area = base.area();
-                    offset = base.offset();
-                    window.requestAnimationFrame(function() {
-                       base.animation(base.position(), options.animation);
-                    });
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        area = base.area();
+                        offset = base.offset();
+                        window.requestAnimationFrame(function() {
+                            base.animation(base.position(), options.animation);
+                        });
+                    }, 500);
                 });
 
                 $(window).scroll(base.wait(options.wait, function() {
@@ -46,7 +51,6 @@
                     });
                 }));
             }  else if (base.mobileDetect() === "mobile-no-native-scroll" &&
-                // Mobile don"t support native scroll -> iScroll is loaded
                 typeof IScroll == "function" && $("#pri-parallax-inner").length) {
                 if (!$("#pri-parallax-wrapper").length ) {
                     $("#pri-parallax-inner").wrap("<div id='pri-parallax-wrapper'/>");
@@ -60,8 +64,8 @@
                     {
                         scrollX: false, 
                         scrollY: true,
-                        click:true,
-                        probeType:3,
+                        click: true,
+                        probeType: 3,
                         bounce: false
                 });
 
@@ -71,7 +75,7 @@
                         base.animation(base.position(scrolled), options.animation);
                     });
                 };
-
+                base.updateMobilePosition();
                 iScroll.on("scroll", base.updateMobilePosition);
                 iScroll.on("scrolltop", base.updateMobilePosition);
 
@@ -138,6 +142,7 @@
 
         base.animation = function (percent, animation){
             var i, k, j, l, m, css, cssValue, currentValue, nextValue, multiplicator, unit;
+            var precision = options.precision;
             //Brekpoints keys
             var animationKeys = [];
             for(k in animation) {
@@ -145,7 +150,6 @@
                     animationKeys.push(k);
                 }
             }
-            //console.log(obj[objKeys[1]]);
             var cssAnimation = animation[animationKeys[0]];
             var cssAnimationKeys = [];
             for(k in cssAnimation) {
@@ -173,38 +177,43 @@
                             for (l = 0; l < propertyKeys.length; l++) {
                                 var cssPropertyValue = [];
                                 for (m = 0; m < propertyVal[propertyKeys[l]].length; m++){
-                                    nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseInt(animation[animationKeys[i+1]][cssAnimationKeys[j]][propertyKeys[l]][m]);
-                                    currentValue =  parseInt(animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m]);
+                                    nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseFloat(animation[animationKeys[i+1]][cssAnimationKeys[j]][propertyKeys[l]][m]);
+                                    currentValue =  animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m];
+                                    if ((propertyKeys[l].indexOf("rgb") > -1) && (currentValue.indexOf(".") === -1)) { 
+                                        precision = "0";
+                                    } else {
+                                        precision = options.precision;
+                                    };
+                                    currentValue =  parseFloat(currentValue);
                                     unit = animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m].match(/px|em|%/);
                                     multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                                     css = currentValue + ((percent - currentBreakpoint ) * multiplicator);
-                                    css = css.toFixed(options.precision) + ((unit === null) ? "" : unit);
+                                    css = css.toFixed(precision) + ((unit === null) ? "" : unit);
                                     cssPropertyValue.push(css);
                                 }
                                 cssValue.push(propertyKeys[l] + "(" + cssPropertyValue  + ")");
                             }
                             cssValue = cssValue.join(" ");
-                            //console.log(cssValue);
                         // Check if value is an array
                         } else if ($.isArray(propertyVal)){
                             cssValue = [];
                             for (l = 0; l < propertyVal.length; l++) {
-                                nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseInt(animation[animationKeys[i+1]][cssAnimationKeys[j]][l]);
-                                currentValue =  parseInt(animation[animationKeys[i]][cssAnimationKeys[j]][l].replace( /^\D+/g, ""));
+                                nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseFloat(animation[animationKeys[i+1]][cssAnimationKeys[j]][l]);
+                                currentValue =  parseFloat(animation[animationKeys[i]][cssAnimationKeys[j]][l]);
                                 unit = animation[animationKeys[i]][cssAnimationKeys[j]][l].match(/px|em|%/);
                                 multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                                 css = currentValue + ((percent - currentBreakpoint ) * multiplicator);
-                                css = css.toFixed(options.precision) + ((unit === null) ? "" : unit);
+                                css = css.toFixed(precision) + ((unit === null) ? "" : unit);
                                 cssValue.push(css);
                             }
                             cssValue = cssValue.join(" ");
-                        } else if (base.isNumeric(parseInt(animation[animationKeys[0]][cssAnimationKeys[j]]))) {
-                            currentValue =  parseInt(animation[animationKeys[i]][cssAnimationKeys[j]]);
-                            nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseInt(animation[animationKeys[i+1]][cssAnimationKeys[j]]);
+                        } else if (base.isNumeric(parseFloat(animation[animationKeys[0]][cssAnimationKeys[j]]))) {
+                            currentValue =  parseFloat(animation[animationKeys[i]][cssAnimationKeys[j]]);
+                            nextValue = (animation[animationKeys[i+1]] === undefined) ? 0 : parseFloat(animation[animationKeys[i+1]][cssAnimationKeys[j]]);
                             unit = animation[animationKeys[i]][cssAnimationKeys[j]].match(/px|em|%/);
                             multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
                             cssValue = currentValue + ((percent - currentBreakpoint ) * multiplicator);
-                            cssValue = cssValue.toFixed(options.precision) + ((unit === null) ? "" : unit);
+                            cssValue = cssValue.toFixed(precision) + ((unit === null) ? "" : unit);
                         } else {
                             cssValue = animation[animationKeys[i]][cssAnimationKeys[j]];
                         }
@@ -221,9 +230,6 @@
         base.position = function(scrolled) {
             if (scrolled === undefined) {scrolled = $(window).scrollTop();}
             var percent = 100 / (area / (scrolled + area - offset ));
-            if (percent > 100) percent = 100;
-            if (percent < 0) percent = 0;
-            percent = percent.toFixed(options.precision);
             return percent;
         };
 
@@ -232,7 +238,7 @@
             return function () {
                 if (!wait) {
                     var position = base.position();
-                    if(position > 0 && position < 100){
+                    if(position >= 0 && position <= 100){
                         callback.call();
                     }
                     wait = true;
@@ -242,6 +248,7 @@
                 }
             };
         };
+
         base.trigger = function (){
             // trigger Parallax
             var trigger;
@@ -252,6 +259,7 @@
             }
             return trigger;
         };
+
         base.area = function (){
             var trigger = base.trigger();
             var windowHeight = $(window).height();
@@ -267,7 +275,7 @@
         base.offset = function (){
             var trigger = base.trigger();
             var windowHeight = $(window).height();
-            var elementHeight = $(trigger).outerHeight();
+            var elementHeight = $(trigger).innerHeight();
             var elementOffset = $(trigger).offset().top;
             var top = base.valuePixels(options.top , windowHeight);
             var elementTop = base.valuePixels(options.elementTop , elementHeight);
