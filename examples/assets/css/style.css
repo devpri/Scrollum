@@ -1,0 +1,136 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	padding: 0;
+	margin: 0;
+}
+.full-height2{
+	height: 300px;
+}
+.pri-btn{
+	margin: 10px;
+}
+#section-1{
+	background-image: url('../img/section-1.jpg');
+	background-size: 160% 190%;
+	overflow: hidden;
+	position: relative;
+}
+#sub-section-1 {
+    color: white;
+    display: block;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    max-width: 100%;
+}
+.pri-parallax-title{
+	font-size: 46px;
+	text-transform: uppercase;
+}
+.pri-parallax-subtitle{
+	font-size: 24px;
+}
+.devpri-logo svg{
+	transition: all 400ms;
+}
+.t3-logo-sign-1 {
+    fill: #299dcc;
+}
+.t3-logo-sign-2 {
+    fill: #fff;
+}
+.t3-logo-text path {
+    fill: #fff;
+}
+.devpri-logo:hover .t3-logo-sign-1 {
+    fill: #fff;
+}
+.devpri-logo:hover .t3-logo-sign-2 {
+    fill: #299dcc;
+}
+.devpri-logo:hover .t3-logo-text path {
+    fill: #299dcc;
+}
+#section-2{
+	background-image: url('../img/section-2.jpg');
+	background-size: 160% 190%;
+	overflow: hidden;
+	position: relative;
+}
+#sub-section-2{
+	position: absolute;
+	display: block;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+	font-size: 46px;
+	color: white;
+}
+#section-3{
+	background-image: url('../img/section-3.jpg');
+	background-size: 160% 190%;
+	overflow: hidden;
+	position: relative;
+}
+#sub-section-3 {
+    height: 100px;
+    margin: 0 auto 40px;
+    perspective: 800px;
+    position: relative;
+    width: 400px;
+}
+
+#sub-section-3-content {
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s ease 0s;
+    width: 100%;
+}
+
+#sub-section-3-content figure {
+    backface-visibility: hidden;
+    color: white;
+    display: block;
+    font-size: 46px;
+    font-weight: bold;
+    height: 100%;
+    line-height: 100px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+#sub-section-3-content .front {
+    background: #181818;
+}
+#sub-section-3-content .back {
+    background: #299DCC;
+    transform: rotateY(180deg);
+}
+#section-4{
+	background-image: url('../img/section-4.jpg');
+	background-size: cover;
+	overflow: hidden;
+	position: relative;
+}
+#section-4-overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+#bar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	display: inline-block;
+	width: auto;
+}
