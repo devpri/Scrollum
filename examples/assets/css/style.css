@@ -5,6 +5,16 @@ body{
 	padding: 0;
 	margin: 0;
 }
+@media (orientation:portrait) {
+ .section-background{
+ 	background-size:  auto 150% !important;
+ }
+}
+@media (orientation:landscape) {
+ .section-background{
+ 	background-size:  150% auto !important;
+ }
+}
 .full-height2{
 	height: 300px;
 }
@@ -13,7 +23,6 @@ body{
 }
 #section-1{
 	background-image: url('../img/section-1.jpg');
-	background-size: 160% 190%;
 	overflow: hidden;
 	position: relative;
 }
@@ -28,6 +37,7 @@ body{
     margin-right: auto;
     padding: 20px;
     max-width: 100%;
+    background-color: rgba(90, 90, 90, 0.8);
 }
 .pri-parallax-title{
 	font-size: 46px;
@@ -36,8 +46,9 @@ body{
 .pri-parallax-subtitle{
 	font-size: 24px;
 }
-.devpri-logo svg{
-	transition: all 400ms;
+
+.devpri-logo{
+	display: block;
 }
 .t3-logo-sign-1 {
     fill: #299dcc;
@@ -74,16 +85,16 @@ body{
 }
 #section-3{
 	background-image: url('../img/section-3.jpg');
-	background-size: 160% 190%;
 	overflow: hidden;
 	position: relative;
 }
 #sub-section-3 {
     height: 100px;
-    margin: 0 auto 40px;
+    margin: 0 auto 20px;
     perspective: 800px;
     position: relative;
     width: 400px;
+    max-width: 100%;
 }
 
 #sub-section-3-content {
@@ -115,7 +126,6 @@ body{
 }
 #section-4{
 	background-image: url('../img/section-4.jpg');
-	background-size: cover;
 	overflow: hidden;
 	position: relative;
 }

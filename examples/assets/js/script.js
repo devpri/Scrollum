@@ -68,7 +68,7 @@ $(function() {
         elementBottom  : "50%",
         elementTop    : "50%",
         precision     : "4",
-        mobile        : true,
+        mobile        : false,
         wait      : "200",
         animation     : {
             0 : {
@@ -97,13 +97,13 @@ $(function() {
         elementBottom  : "100%",
         elementTop    : "0",
         precision     : "4",
-        mobile        : true,
-        wait      	  : "100",
+        mobile        : false,
+        wait      	  : "30",
         duration      : "400",
         animation     : {
             0 : {
                 "transform": { translateY : ["0px"]},
-                "backgroundColor": { rgba : ["90", "90","90","1.1"]}
+                "backgroundColor": { rgba : ["90", "90","90","0.8"]}
             },
             100 : {
             	"transform": { translateY : ["400px"]},
