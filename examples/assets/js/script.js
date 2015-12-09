@@ -22,7 +22,7 @@ $(function() {
             center("#sub-section-2", "#section-2");
             center("#sub-section-3", "#section-3");
             center("#github", "#section-4");
-        }, 300);   		
+        }, 400);   		
     });
 
    $("#section-1").priparallax({
@@ -32,14 +32,14 @@ $(function() {
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait          : "100",
+        wait          : "300",
         duration      : "300",
         animation     : {
             0 : {
                 "backgroundPosition": ["0%", "0%"],
             },
             100 : {
-            	"backgroundPosition": ["0%", "50%"],
+            	"backgroundPosition": ["0%", "30%"],
             }
         }
 	});
@@ -51,14 +51,14 @@ $(function() {
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait      : "300",
+        wait          : "300",
         animation     : {
             0 : {
-                "backgroundPosition": ["0%", "50%"],
+                "backgroundPosition": ["0%", "30%"],
 
             },
             100 : {
-                "backgroundPosition": ["50%", "0%"],
+                "backgroundPosition": ["30%", "0%"],
             }
         }
     });
@@ -71,7 +71,7 @@ $(function() {
         elementTop    : "50%",
         precision     : "4",
         mobile        : false,
-        wait      : "200",
+        wait      : "300",
         animation     : {
             0 : {
                 "transform" : {"scale" : ["1"]},
@@ -100,7 +100,7 @@ $(function() {
         elementTop    : "0",
         precision     : "4",
         mobile        : false,
-        wait      	  : "30",
+        wait      	  : "300",
         duration      : "400",
         animation     : {
             0 : {
@@ -125,11 +125,10 @@ $(function() {
         wait      : "300",
         animation     : {
             0 : {
-                "backgroundPosition": ["0%", "0%"],
-
+                "backgroundPosition": ["0%", "30%"],
             },
             100 : {
-                "backgroundPosition": ["50%", "0%"],
+                "backgroundPosition": ["30%", "0%"],
             }
         }
     });
@@ -141,8 +140,8 @@ $(function() {
         elementBottom  : "60%",
         elementTop    : "60%",
         precision     : "4",
-        mobile        : true,
-        wait          : "50",
+        mobile        : false,
+        wait          : "150",
         animation     : {
             0 : {
                 "transform" : {"rotateY" : ["0deg"]},
@@ -161,7 +160,7 @@ $(function() {
         elementTop    : "100%",
         precision     : "4",
         mobile        : true,
-        wait          : "100",
+        wait          : "300",
         duration      : "400",
         animation     : {
             0 : {
@@ -180,8 +179,8 @@ $(function() {
         elementBottom  : "0",
         elementTop    : "100%",
         precision     : "4",
-        mobile        : true,
-        wait          : "50",
+        mobile        : false,
+        wait          : "300",
         duration      : "400",
         animation     : {
             0 : {
@@ -201,7 +200,7 @@ $(function() {
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait          : "0",
+        wait          : "50",
         animation     : {
             0 : {
                 "width": "0%",

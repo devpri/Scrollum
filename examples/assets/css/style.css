@@ -142,7 +142,7 @@ body{
 	left: 0;
 	height: 3px;
 	display: inline-block;
-	width: auto;
+	width: 0%;
 }
 #github {
     text-align: center;

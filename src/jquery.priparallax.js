@@ -1,6 +1,6 @@
 /*
  * PRI Parallax - jQuery parallax plugin
- * Version 1.0.0 Beta 2
+ * Version 1.0.0 Beta 3
  * Copyright 2015 Devpri
  * License     GNU General Public License version 2 or later.
  */
@@ -26,28 +26,26 @@
         base.init = function(){
             area = base.area();
             offset = base.offset();
-            
+            var animationKeys = base.animationKeys(options.animation);
+            var cssAnimationKeys = base.cssAnimationKeys(options.animation, animationKeys);
+
             if ((base.mobileDetect() === false) || (options.mobile === true && base.mobileDetect() === "mobile-native-scroll")){ 
                 window.requestAnimationFrame(function() {
+                    base.animation(base.position(), options.animation, animationKeys, cssAnimationKeys);
                     $(base).css("transition",  options.duration +"ms"); 
-                    base.animation(base.position(), options.animation);
                 });
-
-                var resizeTimer;
-                $(window).resize(function(){
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(function() {
-                        area = base.area();
-                        offset = base.offset();
-                        window.requestAnimationFrame(function() {
-                            base.animation(base.position(), options.animation);
-                        });
-                    }, 500);
-                });
-
-                $(window).scroll(base.wait(options.wait, function() {
+                
+                $(window).resize(base.wait("500", false, function() {
+                    area = base.area();
+                    offset = base.offset();
                     window.requestAnimationFrame(function() {
-                        base.animation(base.position(), options.animation);
+                        base.animation(base.position(), options.animation, animationKeys, cssAnimationKeys);
+                    });
+                }));
+
+                $(window).scroll(base.wait(options.wait, true, function() {
+                    window.requestAnimationFrame(function() {
+                        base.animation(base.position(), options.animation, animationKeys, cssAnimationKeys);
                     });
                 }));
             }  else if (options.mobile === true && base.mobileDetect() === "mobile-no-native-scroll" &&
@@ -71,7 +69,7 @@
                 base.updateMobilePosition = function(){
                     var scrolled = Math.abs(this.y);
                     window.requestAnimationFrame(function() {
-                        base.animation(base.position(scrolled), options.animation);
+                        base.animation(base.position(scrolled), options.animation, animationKeys, cssAnimationKeys);
                     });
                 };
                 //base.updateMobilePosition();
@@ -127,9 +125,9 @@
         base.valuePixels = function(value, total){
             var valuePixels;
             if (value.indexOf("%") >= 0) {
-                valuePixels = parseInt(value) / 100 * parseInt(total);
+                valuePixels = parseFloat(value) / 100 * parseInt(total);
             } else if ((value.indexOf("px") >= 0) || (!isNaN(parseFloat(value)))) {
-                valuePixels = parseInt(value);
+                valuePixels = parseFloat(value);
             }
             return valuePixels;
         };
@@ -139,23 +137,9 @@
             return !isNaN(parseFloat(n)) && isFinite(n);
         };
 
-        base.animation = function (percent, animation){
+        base.animation = function (percent, animation, animationKeys, cssAnimationKeys){
             var i, k, j, l, m, css, cssValue, currentValue, nextValue, multiplicator, unit;
             var precision = options.precision;
-            //Brekpoints keys
-            var animationKeys = [];
-            for(k in animation) {
-                if(animation.hasOwnProperty(k)) {
-                    animationKeys.push(k);
-                }
-            }
-            var cssAnimation = animation[animationKeys[0]];
-            var cssAnimationKeys = [];
-            for(k in cssAnimation) {
-                if(cssAnimation.hasOwnProperty(k)) {
-                   cssAnimationKeys.push(k);
-                }
-            }
             for (i = 0; i < animationKeys.length; i++) {
                 //Current BreakPouint
                 var currentBreakpoint = Number(animationKeys[i]);
@@ -225,29 +209,51 @@
             }
         };
 
+        base.animationKeys = function(animation){
+            //Brekpoints keys
+            var animationKeys = [];
+            for(var k in animation) {
+                if(animation.hasOwnProperty(k)) {
+                    animationKeys.push(k);
+                }
+            }
+            return animationKeys;
+        }
+
+        base.cssAnimationKeys = function(animation, animationKeys){
+            var cssAnimation = animation[animationKeys[0]];
+            var cssAnimationKeys = [];
+            for(var k in cssAnimation) {
+                if(cssAnimation.hasOwnProperty(k)) {
+                   cssAnimationKeys.push(k);
+                }
+            }
+            return cssAnimationKeys;
+        }
+
         // Element Position
         base.position = function(scrolled) {
             if (scrolled === undefined) {scrolled = $(window).scrollTop();}
             var percent = 100 / (area / (scrolled + area - offset ));
             return percent;
         };
-
-        base.wait = function(limit, callback) {
+        
+        base.wait = function(limit, positionCond, callback) {
             var wait = false;
             return function () {
                 if (!wait) {
-                    var position = base.position();
-                    if(position >= 0 && position <= 100){
-                        callback.call();
-                    }
+                    var position = base.position();  
                     wait = true;
-                    setTimeout(function () {  
+                    setTimeout(function () {
+                       if((positionCond === true && position >= 0 && position <= 100) || positionCond === false){
+                            callback.call();
+                       }
                        wait = false;
                     }, limit);
                 }
             };
         };
-
+        
         base.trigger = function (){
             // trigger Parallax
             var trigger;
