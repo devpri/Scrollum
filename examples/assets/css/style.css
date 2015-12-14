@@ -142,11 +142,8 @@ body{
 	left: 0;
 	height: 3px;
 	display: inline-block;
-<<<<<<< HEAD
 	width: auto;
-=======
 	width: 0%;
->>>>>>> refs/remotes/origin/master
 }
 #github {
     text-align: center;
