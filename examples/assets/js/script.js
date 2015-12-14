@@ -1,3 +1,4 @@
+
 $(function() {
 
    function center(element, toElement){
@@ -15,9 +16,9 @@ $(function() {
 
    var resizeTimer;
    $(window).resize(function(){
-        $(".full-height").height(window.innerHeight);
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
+            $(".full-height").height(window.innerHeight);
             center("#sub-section-1", "#section-1");
             center("#sub-section-2", "#section-2");
             center("#sub-section-3", "#section-3");
@@ -141,7 +142,7 @@ $(function() {
         elementTop    : "60%",
         precision     : "4",
         mobile        : false,
-        wait          : "150",
+        wait          : "300",
         animation     : {
             0 : {
                 "transform" : {"rotateY" : ["0deg"]},
@@ -200,7 +201,7 @@ $(function() {
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait          : "50",
+        wait          : "200",
         animation     : {
             0 : {
                 "width": "0%",

@@ -1,6 +1,6 @@
 /*
  * PRI Parallax - jQuery parallax plugin
- * Version 1.0.0 Beta 3
+ * Version 1.0.0 Beta 4
  * Copyright 2015 Devpri
  * License     GNU General Public License version 2 or later.
  */
@@ -8,9 +8,10 @@
 ;(function($) {
    "use strict";
     // Check if namespace has already been initialized
-     if (!$.pri) {
+    if (!$.pri) {
         $.pri = {};
-     }
+    }
+
     $.pri.parallax = function(el, options) {
         var base = el;
 
@@ -19,62 +20,100 @@
         
         // Add a reverse reference to the DOM object
         base.$e.data("priparallax", base);
-        
-        var area, offset;
-        
+                
         // Initialize
         base.init = function(){
-            area = base.area();
-            offset = base.offset();
+            var area = base.area();
+            var offset = base.offset();
+            var scrolled = $(window).scrollTop();
             var animationKeys = base.animationKeys(options.animation);
             var cssAnimationKeys = base.cssAnimationKeys(options.animation, animationKeys);
+            var positionCond = false;
 
-            if ((base.mobileDetect() === false) || (options.mobile === true && base.mobileDetect() === "mobile-native-scroll")){ 
+            if ((base.mobileDetect() === false) || (options.mobile === true && base.mobileDetect() === "mobile-scroll")){ 
                 window.requestAnimationFrame(function() {
-                    base.animation(base.position(), options.animation, animationKeys, cssAnimationKeys);
                     $(base).css("transition",  options.duration +"ms"); 
+                    base.animation(base.position(area, offset, scrolled), options.animation, animationKeys, cssAnimationKeys);
                 });
                 
-                $(window).resize(base.wait("500", false, function() {
+                $(window).resize(base.wait("500", function() {
                     area = base.area();
                     offset = base.offset();
+                    scrolled = $(window).scrollTop();
+                    var position = base.position(area, offset, scrolled);
+                    position = Math.min(Math.max(parseInt(position), 0), 100);
+                    console.log(scrolled);
                     window.requestAnimationFrame(function() {
-                        base.animation(base.position(), options.animation, animationKeys, cssAnimationKeys);
+                        base.animation(position, options.animation, animationKeys, cssAnimationKeys);
                     });
                 }));
 
-                $(window).scroll(base.wait(options.wait, true, function() {
-                    window.requestAnimationFrame(function() {
-                        base.animation(base.position(), options.animation, animationKeys, cssAnimationKeys);
-                    });
+                $(window).scroll(base.wait(options.wait, function() {
+                    scrolled = $(window).scrollTop();
+                    var position = base.position(area, offset, scrolled);
+                    if (position <= 100 && position >= 0) {
+                        positionCond = false;
+                    }
+                    if (positionCond === false){
+                        if (position > 100 || position < 0) {
+                            position = Math.min(Math.max(parseInt(position), 0), 100);
+                            positionCond = true;
+                        }
+                        window.requestAnimationFrame(function() {
+                            base.animation(position, options.animation, animationKeys, cssAnimationKeys);
+                        });
+                    }
                 }));
-            }  else if (options.mobile === true && base.mobileDetect() === "mobile-no-native-scroll" &&
+            }  else if (options.mobile === true && base.mobileDetect() === "mobile-no-scroll" &&
                 typeof IScroll == "function" && $("#pri-parallax-inner").length) {
+                
                 if (!$("#pri-parallax-wrapper").length ) {
                     $("#pri-parallax-inner").wrap("<div id='pri-parallax-wrapper'/>");
                     $("#pri-parallax-wrapper")
                         .css({"position" : "absolute","width" : "100%","height" : "100%","overflow" : "hidden"})
                         .wrapInner("<div id='pri-parallax-scroller'/>");
                 }
+
                 var iScroll;
-                iScroll =  new IScroll("#pri-parallax-wrapper",
-                    {
-                        scrollX: false, 
-                        scrollY: true,
-                        click: true,
-                        probeType: 3,
-                        bounce: false
+                iScroll =  new IScroll("#pri-parallax-wrapper", {
+                    scrollX: false, 
+                    scrollY: true,
+                    click: true,
+                    probeType: 3,
+                    bounce: false
                 });
 
-                base.updateMobilePosition = function(){
-                    var scrolled = Math.abs(this.y);
-                    window.requestAnimationFrame(function() {
-                        base.animation(base.position(scrolled), options.animation, animationKeys, cssAnimationKeys);
-                    });
+                base.updateMobilePosition = function(position){
+                    if (position <= 100 && position >= 0) {
+                        positionCond = false;
+                    }
+                    if (positionCond === false){
+                        if (position > 100 || position < 0) {
+                            position = Math.min(Math.max(parseInt(position), 0), 100);
+                            positionCond = true;
+                        }
+                        window.requestAnimationFrame(function() {
+                            base.animation(position, options.animation, animationKeys, cssAnimationKeys);
+                        });
+                    }
                 };
-                //base.updateMobilePosition();
-                iScroll.on("scroll", base.updateMobilePosition);
-                iScroll.on("scrolltop", base.updateMobilePosition);
+
+                var position = base.position(area, offset, 0);
+                base.updateMobilePosition(position);
+
+                iScroll.on("refresh", base.wait('500', function() {
+                    area = base.area();
+                    offset = base.offset() - iScroll.y;
+                    scrolled = Math.abs(iScroll.y);
+                    position = base.position(area, offset, scrolled);
+                    base.updateMobilePosition(position);
+                }));
+
+                iScroll.on("scroll", base.wait(options.wait, function() {
+                    scrolled = Math.abs(iScroll.y);
+                    position = base.position(area, offset, scrolled);
+                    base.updateMobilePosition(position);
+                }));
 
                 document.addEventListener("touchmove", function (e) { e.preventDefault(); }, false);
             }
@@ -112,9 +151,9 @@
             
             if (isMobile === true) {
                 if (mobileNativeScroll === true){
-                    return "mobile-native-scroll";
+                    return "mobile-scroll";
                 } else {
-                    return "mobile-no-native-scroll";
+                    return "mobile-no-scroll";
                 }
             } else {
                 return isMobile;
@@ -166,7 +205,7 @@
                                         precision = "0";
                                     } else {
                                         precision = options.precision;
-                                    };
+                                    }
                                     currentValue =  parseFloat(currentValue);
                                     unit = animation[animationKeys[i]][cssAnimationKeys[j]][propertyKeys[l]][m].match(/px|em|%|deg/);
                                     multiplicator =  (nextValue - currentValue) / (nextBreakpoint - currentBreakpoint);
@@ -218,7 +257,7 @@
                 }
             }
             return animationKeys;
-        }
+        };
 
         base.cssAnimationKeys = function(animation, animationKeys){
             var cssAnimation = animation[animationKeys[0]];
@@ -229,26 +268,22 @@
                 }
             }
             return cssAnimationKeys;
-        }
+        };
 
         // Element Position
-        base.position = function(scrolled) {
-            if (scrolled === undefined) {scrolled = $(window).scrollTop();}
+        base.position = function(area, offset, scrolled) {
             var percent = 100 / (area / (scrolled + area - offset ));
             return percent;
         };
         
-        base.wait = function(limit, positionCond, callback) {
+        base.wait = function(limit, callback) {
             var wait = false;
             return function () {
                 if (!wait) {
-                    var position = base.position();  
                     wait = true;
                     setTimeout(function () {
-                       if((positionCond === true && position >= 0 && position <= 100) || positionCond === false){
-                            callback.call();
-                       }
-                       wait = false;
+                        callback.call();
+                        wait = false;
                     }, limit);
                 }
             };
@@ -293,7 +328,7 @@
 
     // Plugin defaults – added as a property on our plugin function.
     $.pri.parallax.defaults = {
-        trigger         : "",
+        trigger        : "",
         top            : "0",
         bottom         : "0",
         elementTop     : "100%",
