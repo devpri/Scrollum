@@ -42,7 +42,6 @@
                     scrolled = $(window).scrollTop();
                     var position = base.position(area, offset, scrolled);
                     position = Math.min(Math.max(parseInt(position), 0), 100);
-                    console.log(scrolled);
                     window.requestAnimationFrame(function() {
                         base.animation(position, options.animation, animationKeys, cssAnimationKeys);
                     });

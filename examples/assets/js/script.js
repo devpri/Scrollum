@@ -16,9 +16,9 @@ $(function() {
 
    var resizeTimer;
    $(window).resize(function(){
+        $(".full-height").height(window.innerHeight);
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            $(".full-height").height(window.innerHeight);
             center("#sub-section-1", "#section-1");
             center("#sub-section-2", "#section-2");
             center("#sub-section-3", "#section-3");
