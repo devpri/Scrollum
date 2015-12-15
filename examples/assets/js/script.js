@@ -1,6 +1,4 @@
-
 $(function() {
-
    function center(element, toElement){
    		elHeight = $(element).outerHeight();
    		toHeight = $(toElement).outerHeight();
@@ -27,9 +25,9 @@ $(function() {
     });
 
    $("#section-1").priparallax({
-		bottom          : "0",
-        top            : "0",
-        elementBottom  : "100%",
+		bottom        : "0",
+        top           : "0",
+        elementBottom : "100%",
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
@@ -46,9 +44,9 @@ $(function() {
 	});
 
    $("#section-2").priparallax({
-        bottom          : "0",
-        top            : "0",
-        elementBottom  : "0",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "0",
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
@@ -65,14 +63,14 @@ $(function() {
     });
 
    $("#sub-section-2").priparallax({
-        trigger        : "#section-2",
-        bottom         : "0",
-        top            : "0",
-        elementBottom  : "50%",
+        trigger       : "#section-2",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "50%",
         elementTop    : "50%",
         precision     : "4",
         mobile        : false,
-        wait      : "300",
+        wait          : "300",
         animation     : {
             0 : {
                 "transform" : {"scale" : ["1"]},
@@ -94,10 +92,10 @@ $(function() {
     });
 
    $("#sub-section-1").priparallax({
-   		trigger        : "#section-1",
-		bottom          : "0",
-        top            : "0",
-        elementBottom  : "100%",
+   		trigger       : "#section-1",
+		bottom        : "0",
+        top           : "0",
+        elementBottom : "100%",
         elementTop    : "0",
         precision     : "4",
         mobile        : false,
@@ -117,13 +115,13 @@ $(function() {
   
 
     $("#section-3").priparallax({
-        bottom          : "0",
-        top            : "0",
-        elementBottom  : "0",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "0",
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait      : "300",
+        wait          : "300",
         animation     : {
             0 : {
                 "backgroundPosition": ["0%", "30%"],
@@ -135,10 +133,10 @@ $(function() {
     });
 
     $("#sub-section-3-content").priparallax({
-        trigger        : "#section-3",
-        bottom         : "0",
-        top            : "0",
-        elementBottom  : "60%",
+        trigger       : "#section-3",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "60%",
         elementTop    : "60%",
         precision     : "4",
         mobile        : false,
@@ -154,10 +152,10 @@ $(function() {
     });
 
     $("#section-4-overlay").priparallax({
-        trigger        :"#section-4",
-        bottom          : "0",
-        top            : "0",
-        elementBottom  : "0",
+        trigger       :"#section-4",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "0",
         elementTop    : "100%",
         precision     : "4",
         mobile        : true,
@@ -174,10 +172,10 @@ $(function() {
     });
 
     $("#github").priparallax({
-        trigger        :"#section-4",
-        bottom          : "0",
-        top            : "0",
-        elementBottom  : "0",
+        trigger       :"#section-4",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "0",
         elementTop    : "100%",
         precision     : "4",
         mobile        : false,
@@ -194,16 +192,16 @@ $(function() {
     });
 
     $("#bar").priparallax({
-        trigger        : "#pri-parallax-inner",
-        bottom         : "100%",
+        trigger       : "#pri-parallax-inner",
+        bottom        : "100%",
         top           : "100%",
-        elementBottom  : "0",
+        elementBottom : "0",
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
         wait          : "200",
         animation     : {
-            0 : {
+            0  : {
                 "width": "0%",
                 "backgroundColor" : {"rgb" : ["255","0","0"]},
             },
@@ -218,4 +216,3 @@ $(function() {
         }
     });
 });
-

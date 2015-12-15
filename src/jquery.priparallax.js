@@ -1,12 +1,21 @@
 /*
  * PRI Parallax - jQuery parallax plugin
- * Version 1.0.0 Beta 4
+ * Version 1.0.0 Beta 5
  * Copyright 2015 Devpri
  * License     GNU General Public License version 2 or later.
  */
-
-;(function($) {
-   "use strict";
+ 
+;(function (factory) {
+    "use strict";
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module depending on jQuery.
+        define(['jquery'], factory);
+    } else {
+        // No AMD. Register plugin with global jQuery object.
+        factory(jQuery);
+    }
+}(function($) {
+    "use strict";
     // Check if namespace has already been initialized
     if (!$.pri) {
         $.pri = {};
@@ -330,7 +339,7 @@
         trigger        : "",
         top            : "0",
         bottom         : "0",
-        elementTop     : "100%",
+        elementTop     : "0",
         elementBottom  : "0",
         precision      : "0",
         mobile         : false,
@@ -347,4 +356,4 @@
             var newParallax = new $.pri.parallax(this, options);
         });
     };
-}(jQuery));
+}));
