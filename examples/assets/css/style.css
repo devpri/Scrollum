@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(//fonts.googleapis.com/css?family=Open+Sans);
 
 body{
 	font-family: 'Open Sans', sans-serif;
@@ -15,8 +15,8 @@ body{
  	background-size:  150% auto !important;
  }
 }
-.full-height2{
-	height: 300px;
+.full-height{
+	height: 500px;
 }
 .pri-btn{
 	margin: 10px;
