@@ -135,18 +135,18 @@ $(function() {
     $("#sub-section-3-content").priparallax({
         trigger       : "#section-3",
         bottom        : "0",
-        top           : "0",
-        elementBottom : "60%",
-        elementTop    : "60%",
+        top           : "50%",
+        elementBottom : "0",
+        elementTop    : "100px",
         precision     : "4",
         mobile        : false,
-        wait          : "400",
+        wait          : "300",
         animation     : {
             0 : {
-                "transform" : {"rotateY" : ["0deg"]},
+                "transform" : {"rotate" : ["0deg"], "scale" : ["0"]},
             },
             100 : {
-                "transform" : {"rotateY" : ["180deg"]},
+                "transform" : {"rotate" : ["360deg"], "scale" : ["1"]},
             },
         }
     });
