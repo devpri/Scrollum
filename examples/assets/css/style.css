@@ -105,8 +105,8 @@ body{
     width: 100%;
 }
 
-#sub-section-3-content figure {
-    backface-visibility: hidden;
+#sub-section-3-content .inner {
+    background: #181818;
     color: white;
     display: block;
     font-size: 46px;
@@ -116,13 +116,6 @@ body{
     position: absolute;
     text-align: center;
     width: 100%;
-}
-#sub-section-3-content .front {
-    background: #181818;
-}
-#sub-section-3-content .back {
-    background: #299DCC;
-    transform: rotateY(180deg);
 }
 #section-4{
 	background-image: url('../img/section-4.jpg');
