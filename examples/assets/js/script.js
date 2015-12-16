@@ -99,7 +99,7 @@ $(function() {
         elementTop    : "0",
         precision     : "4",
         mobile        : false,
-        wait      	  : "300",
+        wait      	  : "400",
         duration      : "400",
         animation     : {
             0 : {
@@ -121,7 +121,7 @@ $(function() {
         elementTop    : "0",
         precision     : "0",
         mobile        : true,
-        wait          : "300",
+        wait          : "400",
         animation     : {
             0 : {
                 "backgroundPosition": ["0%", "30%"],
@@ -140,7 +140,7 @@ $(function() {
         elementTop    : "60%",
         precision     : "4",
         mobile        : false,
-        wait          : "300",
+        wait          : "400",
         animation     : {
             0 : {
                 "transform" : {"rotateY" : ["0deg"]},
@@ -159,7 +159,7 @@ $(function() {
         elementTop    : "100%",
         precision     : "4",
         mobile        : true,
-        wait          : "300",
+        wait          : "400",
         duration      : "400",
         animation     : {
             0 : {
@@ -179,7 +179,7 @@ $(function() {
         elementTop    : "100%",
         precision     : "4",
         mobile        : false,
-        wait          : "300",
+        wait          : "400",
         duration      : "400",
         animation     : {
             0 : {
