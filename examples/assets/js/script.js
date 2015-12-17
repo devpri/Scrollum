@@ -43,6 +43,28 @@ $(function() {
         }
 	});
 
+   $("#sub-section-1").priparallax({
+        trigger       : "#section-1",
+        bottom        : "0",
+        top           : "0",
+        elementBottom : "100%",
+        elementTop    : "0",
+        precision     : "4",
+        mobile        : false,
+        wait          : "400",
+        duration      : "400",
+        animation     : {
+            0 : {
+                "transform": { translateY : ["0px"]},
+                "backgroundColor": { rgba : ["90", "90","90","0.8"]}
+            },
+            100 : {
+                "transform": { translateY : ["400px"]},
+                "backgroundColor": { rgba : ["41", "157","204","0.1"]}
+            }
+        }
+    });
+
    $("#section-2").priparallax({
         bottom        : "0",
         top           : "0",
@@ -90,28 +112,6 @@ $(function() {
             }
         }
     });
-
-   $("#sub-section-1").priparallax({
-   		trigger       : "#section-1",
-		bottom        : "0",
-        top           : "0",
-        elementBottom : "100%",
-        elementTop    : "0",
-        precision     : "4",
-        mobile        : false,
-        wait      	  : "400",
-        duration      : "400",
-        animation     : {
-            0 : {
-                "transform": { translateY : ["0px"]},
-                "backgroundColor": { rgba : ["90", "90","90","0.8"]}
-            },
-            100 : {
-            	"transform": { translateY : ["400px"]},
-                "backgroundColor": { rgba : ["120", "120","120","0.1"]}
-            }
-        }
-	});
   
 
     $("#section-3").priparallax({
