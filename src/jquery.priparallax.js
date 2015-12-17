@@ -36,8 +36,9 @@
             var scrolled = $(window).scrollTop();
             var animationKeys = base.animationKeys(options.animation);
             var animationCssKeys = base.animationCssKeys(options.animation, animationKeys);
-            var positionCond = false;
             var mobileDetect = base.mobileDetect();
+            var positionCond = false;
+
             if ((mobileDetect === false) || (options.mobile === true && mobileDetect === "mobile-scroll")){ 
                 window.requestAnimationFrame(function() {
                     $(base).css("transition",  options.duration +"ms"); 
@@ -71,7 +72,7 @@
                         });
                     }
                 }));
-            }  else if (options.mobile === true && mobileDetect === "mobile-no-scroll" &&
+            } else if (options.mobile === true && mobileDetect === "mobile-no-scroll" &&
                 typeof IScroll == "function" && $("#pri-parallax-inner").length) {
                 
                 if (!$("#pri-parallax-wrapper").length ) {
@@ -90,7 +91,7 @@
                     bounce: false
                 });
 
-                base.updateMobilePosition = function(position){
+                base.updateMobileAnimation = function(position){
                     if (position <= 100 && position >= 0) {
                         positionCond = false;
                     }
@@ -106,20 +107,20 @@
                 };
 
                 var position = base.position(area, offset, 0);
-                base.updateMobilePosition(position);
+                base.updateMobileAnimation(position);
 
                 iScroll.on("refresh", base.wait('500', function() {
                     area = base.area();
                     offset = base.offset() - iScroll.y;
                     scrolled = Math.abs(iScroll.y);
                     position = base.position(area, offset, scrolled);
-                    base.updateMobilePosition(position);
+                    base.updateMobileAnimation(position);
                 }));
 
                 iScroll.on("scroll", base.wait(options.wait, function() {
                     scrolled = Math.abs(iScroll.y);
                     position = base.position(area, offset, scrolled);
-                    base.updateMobilePosition(position);
+                    base.updateMobileAnimation(position);
                 }));
 
                 document.addEventListener("touchmove", function (e) { e.preventDefault(); }, false);
@@ -186,7 +187,7 @@
 
         // Create animation object
         base.animation = function (percent, animation, animationKeys, animationCssKeys){
-            var i, k, j, l, m, css, cssValue, currentValue, nextValue, multiplicator, unit;
+            var i, j, cssValue;
             for (i = 0; i < animationKeys.length; i++) {
                 // Current BreakPouint
                 var currentBreakpoint = Number(animationKeys[i]);
@@ -331,7 +332,6 @@
         
         // Element trigger
         base.trigger = function (){
-            // trigger Parallax
             var trigger;
             if (options.trigger === ""){
                trigger = base;
