@@ -1,9 +1,9 @@
 {
-  "name": "priparallax",
-  "title": "PRI Parallax",
+  "name": "scrollum",
+  "title": "Scrollum",
   "version": "1.0.0",
   "description": "jQuery Parallax Scrolling Plugin",
-  "main": "src/jquery.priparallax.js",
+  "main": "src/jquery.scrollum.js",
   "directories": {
     "example": "examples"
   },
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/devpri/PRI-Parallax.git"
+    "url": "git://github.com/devpri/Scrollum.git"
   },
   "keywords": [
     "parallax",
@@ -31,7 +31,7 @@
   },
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/devpri/PRI-Parallax/issues"
+    "url": "https://github.com/devpri/Scrollum/issues"
   },
   "homepage": "https://www.devpri.com"
 }

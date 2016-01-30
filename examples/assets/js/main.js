@@ -5,14 +5,14 @@ require.config({
     },
     paths: {
         "jquery" : "//code.jquery.com/jquery-1.11.3.min",
-       	"priparallax": "../../../dist/jquery.priparallax.min",
+       	"scrollum": "../../../dist/jquery.scrollum.min",
         "bootstrap" :  "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min",
         "iscroll": "iscroll-probe",  
         "script": "script",  
     }
 });
 
-require(['priparallax','script'], function($){});
+require(['scrollum','script'], function($){});
 
 define([], function () {
     function mobile() {

@@ -1,5 +1,5 @@
 /*
- * PRI Parallax - jQuery Parallax Scrolling Plugin
+ * Scrollum - jQuery Parallax Scrolling Plugin
  * Version      1.0.0
  * Copyright    2016 Devpri
  * License      GNU General Public License version 2 or later.
@@ -20,7 +20,7 @@
         $.pri = {};
     }
 
-    $.pri.parallax = function(el, options) {
+    $.pri.scrollum = function(el, options) {
         var base = el;
 
         // Access to jQuery and DOM versions of element
@@ -373,7 +373,7 @@
     };
 
     // Plugin defaults – added as a property on our plugin function
-    $.pri.parallax.defaults = {
+    $.pri.scrollum.defaults = {
         trigger        : "",
         top            : "0",
         bottom         : "0",
@@ -386,7 +386,7 @@
         animation      : {},
     };
     
-    $.fn.priparallax = function(options) {
+    $.fn.scrollum = function(options) {
         // options
         options = $.extend( {}, $.pri.parallax.defaults, options );
 
