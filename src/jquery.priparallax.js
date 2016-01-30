@@ -1,8 +1,8 @@
 /*
- * PRI Parallax - jQuery parallax plugin
- * Version 1.0.0 Beta 6
- * Copyright 2015 Devpri
- * License     GNU General Public License version 2 or later.
+ * PRI Parallax - jQuery Parallax Scrolling Plugin
+ * Version      1.0.0
+ * Copyright    2016 Devpri
+ * License      GNU General Public License version 2 or later.
  */
  
 ;(function (factory) {
@@ -170,14 +170,14 @@
         };
 
         // percent to pixels
-        base.valuePixels = function(value, total){
-            var valuePixels;
+        base.relativeToAbsolute = function(value, total){
+            var relativeToAbsolute;
             if (value.indexOf("%") >= 0) {
-                valuePixels = parseFloat(value) / 100 * parseInt(total);
+                relativeToAbsolute = parseFloat(value) / 100 * parseInt(total);
             } else if ((value.indexOf("px") >= 0) || (!isNaN(parseFloat(value)))) {
-                valuePixels = parseFloat(value);
+                relativeToAbsolute = parseFloat(value);
             }
-            return valuePixels;
+            return relativeToAbsolute;
         };
 
         // Check if value is numeric
@@ -248,6 +248,7 @@
         };
 
         // Numeric
+        // "opacity"   : "1.0"
         base.animationNumeric = function(animationCurrentValue, animationNextValue, animationCssKey, percent, currentBreakpoint, nextBreakpoint){
             var currentValue =  parseFloat(animationCurrentValue[animationCssKey]);
             var nextValue = (animationNextValue === undefined) ? 0 : parseFloat(animationNextValue[animationCssKey]);
@@ -259,6 +260,7 @@
         };
 
         // Array
+        // "backgroundPosition": ["0%", "30%"]
         base.animationArray = function(animationCurrentValue, animationNextValue, animationCssKey, percent, currentBreakpoint, nextBreakpoint){
             var propertyVal = animationCurrentValue[animationCssKey];
             var cssValue = [];
@@ -276,6 +278,7 @@
         };
 
         // Object value
+        // "transform" : {"rotate" : ["0deg"], "scale" : ["0"]},
         base.animationObject = function(animationCurrentValue, animationNextValue, animationCssKey, percent, currentBreakpoint, nextBreakpoint){
             var k, l, m, precision;
             var propertyVal = animationCurrentValue[animationCssKey];
@@ -346,10 +349,10 @@
             var trigger = base.trigger();
             var windowHeight = $(window).height();
             var elementHeight = $(trigger).outerHeight();
-            var top = base.valuePixels(options.top , windowHeight);
-            var bottom = base.valuePixels(options.bottom , windowHeight);
-            var elementTop = base.valuePixels(options.elementTop , elementHeight);
-            var elementBottom = base.valuePixels(options.elementBottom , elementHeight);  
+            var top = base.relativeToAbsolute(options.top , windowHeight);
+            var bottom = base.relativeToAbsolute(options.bottom , windowHeight);
+            var elementTop = base.relativeToAbsolute(options.elementTop , elementHeight);
+            var elementBottom = base.relativeToAbsolute(options.elementBottom , elementHeight);  
             var area = windowHeight + elementHeight - bottom - elementBottom - top - elementTop;
             return area;
         };
@@ -360,8 +363,8 @@
             var windowHeight = $(window).height();
             var elementHeight = $(trigger).innerHeight();
             var elementOffset = $(trigger).offset().top;
-            var top = base.valuePixels(options.top , windowHeight);
-            var elementTop = base.valuePixels(options.elementTop , elementHeight);
+            var top = base.relativeToAbsolute(options.top , windowHeight);
+            var elementTop = base.relativeToAbsolute(options.elementTop , elementHeight);
             var offset = elementOffset + elementHeight - top - elementTop;
             return offset;
         };
@@ -369,7 +372,7 @@
         base.init();
     };
 
-    // Plugin defaults – added as a property on our plugin function.
+    // Plugin defaults – added as a property on our plugin function
     $.pri.parallax.defaults = {
         trigger        : "",
         top            : "0",
@@ -380,7 +383,7 @@
         mobile         : false,
         wait           : "100",
         duration       : "300",
-        animation      : {}
+        animation      : {},
     };
     
     $.fn.priparallax = function(options) {
