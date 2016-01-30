@@ -1,13 +1,12 @@
 {
-  "name": "PRI-Parallax",
+  "name": "Scrollum",
   "description": "jQuery Parallax Scrolling Plugin",
   "authors": [
     "Devpri <contact@devpri.com>"
   ],
-  "main": "src/jquery.priparallax.js",
+  "main": "src/jquery.scrollum.js",
   "homepage": "https://www.devpri.com",
   "keywords": [
-    "parallax",
     "parallax",
     "scrolling",
     "parallax",

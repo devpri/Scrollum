@@ -24,7 +24,7 @@ $(function() {
         }, 400);   		
     });
 
-   $("#section-1").priparallax({
+   $("#section-1").scrollum({
 		bottom        : "0",
         top           : "0",
         elementBottom : "100%",
@@ -43,7 +43,7 @@ $(function() {
         }
 	});
 
-   $("#sub-section-1").priparallax({
+   $("#sub-section-1").scrollum({
         trigger       : "#section-1",
         bottom        : "0",
         top           : "0",
@@ -65,7 +65,7 @@ $(function() {
         }
     });
 
-   $("#section-2").priparallax({
+   $("#section-2").scrollum({
         bottom        : "0",
         top           : "0",
         elementBottom : "0",
@@ -84,7 +84,7 @@ $(function() {
         }
     });
 
-   $("#sub-section-2").priparallax({
+   $("#sub-section-2").scrollum({
         trigger       : "#section-2",
         bottom        : "0",
         top           : "0",
@@ -114,7 +114,7 @@ $(function() {
     });
   
 
-    $("#section-3").priparallax({
+    $("#section-3").scrollum({
         bottom        : "0",
         top           : "0",
         elementBottom : "0",
@@ -132,7 +132,7 @@ $(function() {
         }
     });
 
-    $("#sub-section-3-content").priparallax({
+    $("#sub-section-3-content").scrollum({
         trigger       : "#section-3",
         bottom        : "0",
         top           : "50%",
@@ -151,7 +151,7 @@ $(function() {
         }
     });
 
-    $("#section-4-overlay").priparallax({
+    $("#section-4-overlay").scrollum({
         trigger       :"#section-4",
         bottom        : "0",
         top           : "0",
@@ -171,7 +171,7 @@ $(function() {
         }
     });
 
-    $("#github").priparallax({
+    $("#github").scrollum({
         trigger       :"#section-4",
         bottom        : "0",
         top           : "0",
@@ -191,7 +191,7 @@ $(function() {
         }
     });
 
-    $("#bar").priparallax({
+    $("#bar").scrollum({
         trigger       : "#pri-parallax-inner",
         bottom        : "100%",
         top           : "100%",

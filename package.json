@@ -1,0 +1,37 @@
+{
+  "name": "scrollum",
+  "title": "Scrollum",
+  "version": "1.0.0",
+  "description": "jQuery Parallax Scrolling Plugin",
+  "main": "src/jquery.scrollum.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/devpri/Scrollum.git"
+  },
+  "keywords": [
+    "parallax",
+    "scrolling",
+    "parallax",
+    "animations",
+    "jquery",
+    "parallax",
+    "devpri",
+    "jquery-plugin",
+    "ecosystem:jquery"
+  ],
+  "author": {
+    "name": "Devpri",
+    "url": "https://www.devpri.com"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/devpri/Scrollum/issues"
+  },
+  "homepage": "https://www.devpri.com"
+}

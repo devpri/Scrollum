@@ -1,4 +1,4 @@
-# PRI Parallax v1.0.0
+# Scrollum v1.0.0
 jQuery Parallax Scrolling Plugin
 #License
 Released under the General Public License version 2 or later license.
@@ -16,9 +16,9 @@ Released under the General Public License version 2 or later license.
 - Load iscroll-probe.js before PRI Parallax.
 - Wrap body content inside a container with id: pri-parallax-inner
 
-**Call the PRI Parallax plugin**
+**Call the Scrollum plugin**
 
-    $("your-selector").priparallax({
+    $("your-selector").scrollum({
         trigger       : "",
         top           : "0",
         bottom        : "0",
